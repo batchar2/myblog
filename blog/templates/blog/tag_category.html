@@ -1,0 +1,19 @@
+<div class="right-widget">
+	<div class="right-widget-header">
+		<h2>Категории</h2>
+	</div>
+	<div class="right-widget-contnet">
+		<div class="right-widget-contnet-list">
+			<ul>
+				{% for category in categories %}
+				<li>
+					<a href="{% url 'post_list_category' slug=category.slug %}">
+						{{ category.name }}
+						<span class="badge">{{ category.posts.count }}</span>
+					</a>
+				</li>
+				{% endfor %}
+			</ul>				
+		</div>
+	</div>
+</div>
