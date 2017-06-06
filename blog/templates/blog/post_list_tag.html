@@ -23,7 +23,7 @@
 				</div>
 
 				<span class="content-post-head-date">
-					{{ post.published_date }} 
+					{{ post.created_date }}  
 					| 
 					<a href="{% url 'post_list_category' slug=post.category.slug %}">
 						{{ post.category.name }}

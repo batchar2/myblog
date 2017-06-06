@@ -1,0 +1,15 @@
+<div class="content-related-posts">
+	<h3>Смотри также:</h3>
+	<ul>
+		{% for post in posts %}
+			<li>
+				<a href="{% url 'post_detail' slug=post.slug %}">
+					<span class="related-images">
+						<img width="200" height="200" src="/static/uploads/{{ post.preview_image }}"/>
+					</span>
+					<span class="related-title"> {{ post.title }}</span>
+				</a>
+			</li>
+		{% endfor %}
+	</ul>
+</div>

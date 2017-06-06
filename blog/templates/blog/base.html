@@ -1,9 +1,16 @@
 {% load staticfiles %}
+
+
 {% load category %}
 {% load popular_post %}
 
 
-{% load comments %}
+{#% load comments %#}
+{#% load comments static %#}
+
+
+
+
 
 <!DOCTYPE html>
 <html>
@@ -11,6 +18,14 @@
 		<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 		<link rel="stylesheet" href="{% static 'css/bootstrap-theme.min.css' %}">
 		<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+		<link rel="stylesheet" type="text/css" href="{% static 'fluent_comments/css/ajaxcomments.css' %}" />
+		
+		<script type="text/javascript" src="{% static 'fluent_comments/js/ajaxcomments.js' %}"></script>
+
+
+		<link rel="stylesheet" href="http://yandex.st/highlightjs/6.1/styles/zenburn.css">
+		<script src="http://yandex.st/highlightjs/6.1/highlight.min.js"></script>
 
 		<title>{% block title %}{% endblock %}</title>
 	</head>
@@ -32,10 +47,7 @@
 								<a href="{% url 'post_list' %}">Статьи</a>
 							</li>
 							<li>
-								<a href="#">Проекты</a>
-							</li>
-							<li>
-								<a href="#">Эбаут</a>
+								<a href="{% url 'about' %}">Эбаут</a>
 							</li>
 						</ul>
 					</div>

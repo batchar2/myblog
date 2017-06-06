@@ -3,6 +3,27 @@ from django.utils import timezone
 
 from ckeditor.fields import RichTextField
 
+from PIL import Image
+
+
+class SitePage(models.Model):
+    name = models.CharField(max_length=100, default='')
+    url = models.CharField(max_length=100, default='')
+
+    content = RichTextField()
+    
+    created_date = models.DateTimeField(default=timezone.now)
+    number_views = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Страница сайта'
+        verbose_name_plural = 'Страницы сайта'
+        ordering = ('-name',)
+    
+
 class Tag(models.Model):
     name = models.CharField(max_length=100, default='')
     slug = models.SlugField(unique=True, max_length=200)
@@ -36,16 +57,12 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, max_length=200)
     
-
-    #content = models.TextField()
     content_preview = RichTextField()
     content = RichTextField()
     
-    created_date = models.DateTimeField(
-            default=timezone.now)
+    created_date = models.DateTimeField(default=timezone.now)
     
-    published_date = models.DateTimeField(
-            blank=True, null=True)
+    published_date = models.DateTimeField(blank=True, null=True)
 
     is_publish = models.BooleanField(default=False)
 
@@ -58,9 +75,26 @@ class Post(models.Model):
     # колличество просмотров страницы
     number_views = models.PositiveIntegerField(default=0)
 
+    allow_comments = models.BooleanField('allow comments', default=True)
+
+    def save(self):
+        if not self.id and not self.preview_image:
+            return
+
+        super(Post, self).save()
+
+        image = Image.open(self.preview_image)
+        (width, height) = image.size
+
+        size = (200, 200)
+        image = image.resize(size, Image.ANTIALIAS)
+        image.save(self.preview_image.path)
+
+
     def publish(self):
         self.published_date = timezone.now()
         self.save()
+
 
     def __str__(self):
         return self.title
@@ -68,7 +102,12 @@ class Post(models.Model):
     def __unicode__(self):
         return self.title
 
+
     class Meta:
         verbose_name = 'Статья'
         verbose_name_plural = 'Статьи'
         ordering = ('-published_date',)
+
+
+    def url(self):
+        return 'uploads' + self.preview_image

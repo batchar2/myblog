@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Post, Category, Tag
+from .models import Post, Category, Tag, SitePage
 
 
 """
@@ -28,11 +28,14 @@ class TagAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
     list_display = ('name', 'is_publish', 'slug')
 
+class PageAdmin(admin.ModelAdmin):
+    list_display = ('name', 'url',)
+
 
 admin.site.register(Post, PostAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Tag, TagAdmin)
-
+admin.site.register(SitePage, PageAdmin)
 """
 Управление сайтом
 """

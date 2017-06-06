@@ -2,17 +2,12 @@
 
 {% block page_content %}
 
-
-
 <div class="content-post">
 	<div>
 		<div class="content-post-head">
 			<div class="content-post-head-image">
 				<a class="">
-					<img src="https://wpcafe.org/wp-content/uploads/navbarbootstrap2.png"
-					width="200"
-					height="200" 
-					/>
+					<img src="/static/uploads/{{ post.preview_image }}"/>
 				</a>
 			</div>
 
@@ -22,7 +17,7 @@
 				</div>
 
 				<span class="content-post-head-date">
-					{{ post.published_date }} 
+					{{ post.created_date }} 
 					| 
 					<a href="{% url 'post_list_category' slug=post.category.slug %}">
 						{{ post.category.name }}
@@ -57,48 +52,23 @@
 		<hr/>
 	</div>
 
-	<div class="content-related-posts">
-		<h3>Смотри также:</h3>
-		<ul>
-			<li>
-				<a href="#">
-					<span class="related-images">
-						<img src="https://wpcafe.org/wp-content/uploads/9freebootstrap.png"/>
-					</span>
-					<span class="related-title">Название поста</span>
-				</a>
-			</li>
-
-			<li>
-				<a href="#">
-					<span class="related-images">
-						<img src="https://wpcafe.org/wp-content/uploads/9freebootstrap.png"/>
-					</span>
-					<span class="related-title">Название поста</span>
-				</a>
-			</li>
-
-			<li>
-				<a href="#">
-					<span class="related-images">
-						<img src="https://wpcafe.org/wp-content/uploads/9freebootstrap.png"/>
-					</span>
-					<span class="related-title">Название поста</span>
-				</a>
-			</li>
-		</ul>
+	<div>
+		{% load view_related_posts %}
+		{% view_related_posts %}
 	</div>
 
 	<div>
 		<h3>Комментарии</h3>
 		<div>
-			{% get_comment_count for post as comment_count %}
-			<div class="text-center" style="padding-top:20px">
-				<a href="{% url 'blog:post-list' %}">Back to the post list</a>
-				&nbsp;&sdot;&nbsp;
-				{{ comment_count }} comments have been posted.
-			</div>
+			{% comment "Optional note" %}
 
+				{% load comments %}
+				{% load comments_xtd %}
+				{% load i18n %}
+
+				{% render_comment_list for post %}
+				{% render_comment_form for post %}
+			{% endcomment %}
 		</div>
 		
 	</div>

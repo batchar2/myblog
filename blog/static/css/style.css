@@ -186,8 +186,8 @@ hr {
 
 /* Связаные посты */
 
-.content-related-posts{
-	
+.content-related-posts {
+
 }
 .content-related-posts h3 {
 	
@@ -201,12 +201,15 @@ hr {
 	float: left;
 	overflow: hidden;
 	margin: 0 15px;
-	border: 1px solid black;
+	text-align: left;
 }
-
 .content-related-posts ul li a span {
 	width: 100%;
 	display: block;
+}
+
+.related-title {
+	margin: 5px 0px;
 }
 
 .content-related-posts h3
