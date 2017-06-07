@@ -12,21 +12,19 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'u1$&h3pz1js3pqoe37zt3r!5s457nr9dw@h5_bj!ra@ai_749k'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
 ALLOWED_HOSTS = [
-    '35.165.202.83',
     '127.0.0.1',
 ]
 
@@ -85,12 +83,27 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+
+if DEBUG is True:
+    DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+            }
+        }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql', # Добавить 'postgresql_psycopg2', 'mysql', 'sqlite3' или 'oracle'.
+            'NAME': 'blog', # имя БД                       
+            # следущие настройки не используются с sqlite3 
+            'USER': 'userblog', # пользователь СУБД
+            'PASSWORD': 'userblog', # пароль пользователя
+            'HOST': '127.0.0.1',  # адрес               
+            'PORT': '', # установить порт СУБД, по умолчанию 3306 для mysql             
+        }
     }
-}
+
 
 
 # Password validation
@@ -130,8 +143,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'blog/static')
-MEDIA_ROOT = os.path.join(STATIC_ROOT, 'uploads')
+if DEBUG is True:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'blog/static')
+    MEDIA_ROOT = os.path.join(STATIC_ROOT, 'uploads')
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    MEDIA_ROOT = os.path.join(STATIC_ROOT, 'uploads')
+
 
 CKEDITOR_CONFIGS = {
    'default': {
