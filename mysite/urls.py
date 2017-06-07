@@ -16,11 +16,29 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
+from django.conf import settings
+
+from filebrowser.sites import site
+site.directory = "uploads/"
+site.storage.location = 'static/'
+
+DIRECTORY = getattr(settings, "FILEBROWSER_DIRECTORY", 'uploads/')
+site.directory = DIRECTORY
+
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'', include('blog.urls')),
+
+    url(r'^admin/filebrowser/', site.urls),
+    url(r'^grappelli/', include('grappelli.urls')),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    
+#    url(r'^tinymce/', include('tinymce.urls')),
     url(r'^comments/', include('django_comments_xtd.urls')),
+
+    url(r'^admin/', admin.site.urls),
+    url(r'', include('blog.urls')),    
+
     #url(r'^articles/comments/', include('django_comments.urls')),
     #url(r'^admin/', include(admin.site.urls)),
 ]
+
+

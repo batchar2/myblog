@@ -1,5 +1,9 @@
 {% extends 'blog/base.html' %}
 
+{% block title %}
+	Тег/{{ tag.name }}
+{% endblock %}
+
 {% block page_content %}
 
 <h2>Тег/{{ tag.name }}</h2>

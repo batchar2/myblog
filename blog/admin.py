@@ -3,6 +3,22 @@ from django.contrib import admin
 from .models import Post, Category, Tag, SitePage
 
 
+# Статические файлы
+#from django.core.files.storage import DefaultStorage
+#from filebrowser.sites import FileBrowserSite
+
+#from django.core.files.storage import FileSystemStorage
+#site.storage = FileSystemStorage(location='uppload', base_url='/media/')
+
+# Default FileBrowser site
+#site = FileBrowserSite(name='filebrowser', storage=DefaultStorage())
+#
+# My Custom FileBrowser site
+#custom_site = FileBrowserSite(name='custom_filebrowser', storage=DefaultStorage())
+#custom_site.directory = "uploads/"
+#
+#admin.site.register(site)
+
 """
 Управление блогом
 """

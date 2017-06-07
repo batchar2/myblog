@@ -1,5 +1,12 @@
 {% extends 'blog/base.html' %}
 
+
+{% block title %}
+	Категория/{{ category.name }}
+{% endblock %}
+
+
+
 {% block page_content %}
 
 <h2>Категория/{{ category.name }}</h2>

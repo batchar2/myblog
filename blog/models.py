@@ -2,6 +2,8 @@ from django.db import models
 from django.utils import timezone
 
 from ckeditor.fields import RichTextField
+from tinymce.models import HTMLField
+
 
 from PIL import Image
 
@@ -57,8 +59,14 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, max_length=200)
     
+    meta_kayword = models.CharField('Ключевые слова', default='', max_length=200)
+    meta_description = models.CharField('Описание статьи для поисковика', default='', max_length=200)
+
     content_preview = RichTextField()
     content = RichTextField()
+
+    #content_preview = HTMLField()
+    #content = HTMLField()
     
     created_date = models.DateTimeField(default=timezone.now)
     

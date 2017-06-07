@@ -26,11 +26,10 @@ SECRET_KEY = 'u1$&h3pz1js3pqoe37zt3r!5s457nr9dw@h5_bj!ra@ai_749k'
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
+    '35.165.202.83',
 ]
 
-
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -41,9 +40,13 @@ INSTALLED_APPS = [
 #    'django.contrib.sites',
     'blog',
     'ckeditor',
+    'tinymce',
     'django.contrib.sites',
     'django_comments_xtd',
-    'django_comments'
+    'django_comments',
+
+    'grappelli',
+    'filebrowser',
     #'disqus',
 ]
 
@@ -150,6 +153,9 @@ else:
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
     MEDIA_ROOT = os.path.join(STATIC_ROOT, 'uploads')
 
+#FILEBROWSER_DIRECTORY = MEDIA_ROOT
+#DIRECTORY = STATIC_ROOT
+
 
 CKEDITOR_CONFIGS = {
    'default': {
@@ -192,3 +198,105 @@ EMAIL_PORT = "587"
 EMAIL_HOST_USER = "alias@mail.com"
 EMAIL_HOST_PASSWORD = "yourpassword"
 DEFAULT_FROM_EMAIL = "Helpdesk <helpdesk@yourdomain>"
+
+
+from filebrowser.sites import site
+site.directory = "uploads/"
+
+"""
+TINYMCE_DEFAULT_CONFIG = {
+    #'plugins': "all,table,spellchecker,paste,searchreplac,style,fullscreen,advlist,autolink,autosave,link,image,lists,charmap,print,preview,hr,anchor,pagebreak,searchreplace,wordcount,visualblocks,visualchars,code,fullscreen,insertdatetime,media,nonbreaking,table,contextmenu,directionality,emoticons,template,textcolor,paste,fullpage,textcolor,colorpicker,textpattern",
+    'plugins': 'all',
+    'theme': "advanced",
+    'height': '500px',
+    'width': '100%',
+    #'toolbar1': "newdocument fullpage | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect",
+    #'toolbar2': "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor image media code | insertdatetime preview | forecolor backcolor",
+    #'toolbar3': "table | hr removeformat | subscript superscript | charmap emoticons | print fullscreen | ltr rtl | visualchars visualblocks nonbreaking template pagebreak restoredraft",
+
+    'cleanup_on_startup': True,
+    'custom_undo_redo_levels': 10,
+}
+TINYMCE_SPELLCHECKER = True
+TINYMCE_COMPRESSOR = True
+
+TINYMCE_EXTRA_MEDIA = {
+    'css': {
+        'all': [
+                '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+                '//www.tinymce.com/css/codepen.min.css',
+        ],
+    },
+    'js': [
+        #...
+    ],
+}
+"""
+    
+  
+"""
+tinymce.init({
+  selector: "textarea",
+  height: 500,
+  plugins: [
+    "advlist autolink autosave link image lists charmap print preview hr anchor pagebreak",
+    "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+    "table contextmenu directionality emoticons template textcolor paste fullpage textcolor colorpicker textpattern"
+  ],
+
+  toolbar1: "newdocument fullpage | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect",
+  toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor image media code | insertdatetime preview | forecolor backcolor",
+  toolbar3: "table | hr removeformat | subscript superscript | charmap emoticons | print fullscreen | ltr rtl | visualchars visualblocks nonbreaking template pagebreak restoredraft",
+  content_css: [
+    '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+    '//www.tinymce.com/css/codepen.min.css'],
+
+  menubar: false,
+  toolbar_items_size: 'small',
+
+  style_formats: [{
+    title: 'Bold text',
+    inline: 'b'
+  }, {
+    title: 'Red text',
+    inline: 'span',
+    styles: {
+      color: '#ff0000'
+    }
+  }, {
+    title: 'Red header',
+    block: 'h1',
+    styles: {
+      color: '#ff0000'
+    }
+  }, {
+    title: 'Example 1',
+    inline: 'span',
+    classes: 'example1'
+  }, {
+    title: 'Example 2',
+    inline: 'span',
+    classes: 'example2'
+  }, {
+    title: 'Table styles'
+  }, {
+    title: 'Table row 1',
+    selector: 'tr',
+    classes: 'tablerow1'
+  }],
+
+  templates: [{
+    title: 'Test template 1',
+    content: 'Test 1'
+  }, {
+    title: 'Test template 2',
+    content: 'Test 2'
+  }]
+});
+
+"""
+
+
+from django.conf import settings
+
+PRIVATE_DIR = getattr(settings, "PRIVATE_DIR", None)
