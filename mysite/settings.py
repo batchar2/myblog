@@ -25,7 +25,10 @@ SECRET_KEY = 'u1$&h3pz1js3pqoe37zt3r!5s457nr9dw@h5_bj!ra@ai_749k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '35.165.202.83',
+    '127.0.0.1',
+]
 
 
 # Application definition
@@ -37,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+#    'django.contrib.sites',
     'blog',
     'ckeditor',
     'django.contrib.sites',
@@ -44,6 +48,8 @@ INSTALLED_APPS = [
     'django_comments'
     #'disqus',
 ]
+
+SITE_ID=1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

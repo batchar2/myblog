@@ -11,56 +11,6 @@
 		</div>
 	</div>
 
-	<div>
-		<hr/>
-	</div>
-
-	<div class="content-related-posts">
-		<h3>Смотри также:</h3>
-		<ul>
-			<li>
-				<a href="#">
-					<span class="related-images">
-						<img src="https://wpcafe.org/wp-content/uploads/9freebootstrap.png"/>
-					</span>
-					<span class="related-title">Название поста</span>
-				</a>
-			</li>
-
-			<li>
-				<a href="#">
-					<span class="related-images">
-						<img src="https://wpcafe.org/wp-content/uploads/9freebootstrap.png"/>
-					</span>
-					<span class="related-title">Название поста</span>
-				</a>
-			</li>
-
-			<li>
-				<a href="#">
-					<span class="related-images">
-						<img src="https://wpcafe.org/wp-content/uploads/9freebootstrap.png"/>
-					</span>
-					<span class="related-title">Название поста</span>
-				</a>
-			</li>
-		</ul>
-	</div>
-
-	<div>
-		<h3>Комментарии</h3>
-		<div>
-			
-			{#% get_comment_count for post as comment_count %#}
-			<div class="text-center" style="padding-top:20px">
-				<a href="{#% url 'blog:post-list' %#}">Back to the post list</a>
-				&nbsp;&sdot;&nbsp;
-				{{ comment_count }} comments have been posted.
-			</div>
-
-		</div>
-		
-	</div>
 </div>
 
 {% endblock %}
