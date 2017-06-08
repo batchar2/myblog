@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 
 from ckeditor.fields import RichTextField
-from tinymce.models import HTMLField
+#from tinymce.models import HTMLField
 
 
 from PIL import Image

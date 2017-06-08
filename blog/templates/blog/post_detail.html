@@ -4,11 +4,16 @@
 	{{ post.title }}
 {% endblock %}
 
+
+{% block description %} post.meta_description {%endblock%}
+
+{% block keywords %} post.meta_kayword {% endblock %}
+
+
 {% block page_content %}
 
 <div class="content-post">
-	<div>
-		<div class="content-post-head">
+	<div class="content-post-head">
 			<div class="content-post-head-image">
 				<a class="">
 					<img src="/static/uploads/{{ post.preview_image }}"/>
@@ -41,17 +46,12 @@
 					</div>
 				</div>
 			</div>
-		</div>
 	</div>
 
-	<div>
-		<div class="content-post-text">
-			<div>
-				{{ post.content | safe }}
-			</div>
-		</div>
+	<div class="content-post-text">
+		{{ post.content | safe }}
 	</div>
-
+	
 	<div>
 		<hr/>
 	</div>
@@ -64,15 +64,27 @@
 	<div>
 		<h3>Комментарии</h3>
 		<div>
-			{% comment "Optional note" %}
+			<div id="disqus_thread"></div>
+				<script>
 
-				{% load comments %}
-				{% load comments_xtd %}
-				{% load i18n %}
-
-				{% render_comment_list for post %}
-				{% render_comment_form for post %}
-			{% endcomment %}
+				/**
+				*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+				*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+				/*
+				var disqus_config = function () {
+				this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+				this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+				};
+				*/
+				(function() { // DON'T EDIT BELOW THIS LINE
+				var d = document, s = d.createElement('script');
+				s.src = 'https://myblog-yriwf6om1n.disqus.com/embed.js';
+				s.setAttribute('data-timestamp', +new Date());
+				(d.head || d.body).appendChild(s);
+				})();
+				</script>
+				<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+				                                
 		</div>
 		
 	</div>

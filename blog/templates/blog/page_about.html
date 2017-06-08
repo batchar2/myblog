@@ -6,14 +6,9 @@
 {% block page_content %}
 
 <div class="content-post">
-	<div>
-		<div class="content-post-text">
-			<div>
-				{{ page.content | safe }}
-			</div>
-		</div>
+	<div class="content-post-text">
+		{{ page.content | safe }}
 	</div>
-
 </div>
 
 {% endblock %}

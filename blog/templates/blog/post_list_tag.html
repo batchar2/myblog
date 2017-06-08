@@ -10,8 +10,7 @@
 	
 {% for post in tag.posts.all %}
 <div class="content-post">
-	<div>
-		<div class="content-post-head">
+	<div class="content-post-head">
 			<div class="content-post-head-image">
 				<a href="{% url 'post_detail' slug=post.slug %}">
 					<img src="https://wpcafe.org/wp-content/uploads/navbarbootstrap2.png"
@@ -47,17 +46,12 @@
 					</div>
 				</div>
 			</div>
-		</div>
 	</div>
 
-	<div>
-		<div class="content-post-text">
-			<div>
-				{{ post.content_preview | safe }}
-			</div>
-		</div>
+	<div class="content-post-text">
+		{{ post.content_preview | safe }}
 	</div>
-
+	
 	<div class="content-view-btn-block">
 		<a class="btn btn-default" href="{% url 'post_detail' slug=post.slug %}">Читать дальше</a>
 	</div>

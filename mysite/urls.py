@@ -30,15 +30,10 @@ urlpatterns = [
     url(r'^admin/filebrowser/', site.urls),
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
-    
-#    url(r'^tinymce/', include('tinymce.urls')),
     url(r'^comments/', include('django_comments_xtd.urls')),
 
     url(r'^admin/', admin.site.urls),
-    url(r'', include('blog.urls')),    
-
-    #url(r'^articles/comments/', include('django_comments.urls')),
-    #url(r'^admin/', include(admin.site.urls)),
+    url(r'', include('blog.urls')),
 ]
 
 
