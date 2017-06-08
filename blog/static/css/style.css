@@ -231,6 +231,7 @@ hr {
 .content-post-text p {
 	padding: 0px;
 	margin: 0px;
+	text-indent: 20px;
 }
 
 .post-views-icon {
@@ -253,5 +254,5 @@ hr {
 }
 
 #footer div {
-	padding-top: 15px;
+	padding-top: 20px;
 }

@@ -5,8 +5,6 @@ from django.db.models import F
 
 from .models import Post, Category, Tag, SitePage
 
-# Create your views here.
-
 def about(request):
 	page = get_object_or_404(SitePage, url='about')
 	SitePage.objects.filter(url='about').update(number_views=F("number_views") + 1)
