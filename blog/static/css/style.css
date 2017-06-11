@@ -241,6 +241,17 @@ hr {
 
 }
 
+
+.content-post-text ul li {
+	font-size: 14px;
+	font-family: Verdana,sans-serif;
+}
+
+.content-post-text p ul li {
+	font-size: 14px;
+	font-family: Verdana,sans-serif;
+}
+
 .post-views-icon {
 	background: url("../imgs/eye.png") no-repeat 0 0;
 	width: 16px;

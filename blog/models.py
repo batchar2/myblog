@@ -13,7 +13,6 @@ class SitePage(models.Model):
     url = models.CharField(max_length=100, default='')
 
     content = RichTextField()
-    
     created_date = models.DateTimeField(default=timezone.now)
     number_views = models.PositiveIntegerField(default=0)
 
@@ -24,13 +23,12 @@ class SitePage(models.Model):
         verbose_name = 'Страница сайта'
         verbose_name_plural = 'Страницы сайта'
         ordering = ('-name',)
-    
 
 class Tag(models.Model):
     name = models.CharField(max_length=100, default='')
     slug = models.SlugField(unique=True, max_length=200)
     is_publish = models.BooleanField(default=False)
-    
+
     def __str__(self):
         return self.name
 
@@ -58,18 +56,15 @@ class Post(models.Model):
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, max_length=200)
-    
-    meta_kayword = models.CharField('Ключевые слова', default='', max_length=200)
-    meta_description = models.CharField('Описание статьи для поисковика', default='', max_length=200)
+    meta_kayword = models.CharField(u'Ключевые слова', default='', max_length=200)
+    meta_description = models.CharField(u'Описание статьи для поисковика', default='', max_length=200)
 
     content_preview = RichTextField()
     content = RichTextField()
 
     #content_preview = HTMLField()
     #content = HTMLField()
-    
     created_date = models.DateTimeField(default=timezone.now)
-    
     published_date = models.DateTimeField(blank=True, null=True)
 
     is_publish = models.BooleanField(default=False)

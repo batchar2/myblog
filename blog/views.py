@@ -33,4 +33,4 @@ def post_list_category(request, slug):
 def post_list_tag(request, slug):
 	tag = get_object_or_404(Tag, slug=slug)
 
-	return render(request, 'blog/post_list_tag.html', {'tag': tag})
+	return render(request, 'blog/post_list_tag.html', {'tag': tag})	
