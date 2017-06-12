@@ -9,10 +9,9 @@
 
 {% block page_content %}
 
-<h2>Категория/{{ category.name }}</h2>
+	<h2>Категория/{{ category.name }}</h2>
 	
-{% for post in posts %}
-
+	{% for post in category.posts.all %}
 		{% if post.is_publish or request.user.is_authenticated %}
 			<div class="content-post">
 				<div class="content-post-head">
