@@ -14,5 +14,6 @@ urlpatterns = [
     url(r'^post/(?P<slug>[-\w]+)/$', views.post_detail, name='post_detail'),
     url(r'^category/(?P<slug>[-\w]+)/$', views.post_list_category, name='post_list_category'),
     url(r'^tag/(?P<slug>[-\w]+)/$', views.post_list_tag, name='post_list_tag'),
+    url(r'^googledfac55627724f996.html$', views.google_page, name='google_page'),
 ]
 

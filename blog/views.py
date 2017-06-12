@@ -40,3 +40,6 @@ def page_not_found(request):
 # 500
 def server_error(request):
     return render(request, 'blog/500.html')
+
+def google_page(request):
+    return render(request, 'blog/google_page.html')
