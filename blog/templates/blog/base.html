@@ -28,7 +28,11 @@
 		<!--<div class = "container">
 		-->
 		<div class="container border-container">
-			
+			{% if request.user.is_authenticated %}
+				<div class="col-md-12" style="text-align:right;background-color: #cccccc">
+					Вы вошли как {{ request.user.username }}
+				</div>
+			{% endif %}
 			<!-- Head -->
 			<div class="col-md-12">
 				<div id="header">

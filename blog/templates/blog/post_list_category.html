@@ -11,56 +11,64 @@
 
 <h2>Категория/{{ category.name }}</h2>
 	
-{% for post in category.posts.all %}
-<div class="content-post">
-	<div class="content-post-head">
-			<div class="content-post-head-image">
-				<a href="{% url 'post_detail' slug=post.slug %}">
-					<img src="/static/uploads/{{ post.preview_image }}"/>
-				</a>
-			</div>
+{% for post in posts %}
 
-			<div class="content-post-head-info">
-				<div class="content-post-head-header">
-					<h1><a href="{% url 'post_detail' slug=post.slug %}">{{ post.title }}</a></h1>
+		{% if post.is_publish or request.user.is_authenticated %}
+			<div class="content-post">
+				<div class="content-post-head">
+						<div class="content-post-head-image">
+							<a href="{% url 'post_detail' slug=post.slug %}">
+								<img src="/static/uploads/{{ post.preview_image }}"/>
+							</a>
+						</div>
+
+						<div class="content-post-head-info">
+							<div class="content-post-head-header">
+								<h1><a href="{% url 'post_detail' slug=post.slug %}">{{ post.title }}</a></h1>
+							</div>
+
+							<span class="content-post-head-date">
+								{{ post.created_date }} 
+								| 
+								<a href="{% url 'post_list_category' slug=post.category.slug %}">
+									{{ post.category.name }}
+								</a>
+								|
+								<i class="post-views-icon"></i>
+								<span class="post-views-number">Просмотрена {{ post.number_views }} раз</span>
+								{% if post.is_publish %}{% else %}
+									<span class="content-post-head-date">
+										<i style="color:red">DEBUG</i>
+									</span>
+								{% endif %}
+							</span>
+
+							
+							<div class="content-post-head-tags">
+								<div class="tags">
+									<ui>
+										{% for tag in post.tags.all %}
+											<a href="{% url 'post_list_tag' slug=tag.slug %}">{{ tag.name }}</a>
+										{% endfor %}
+									</ui>
+								</div>
+							</div>
+						</div>
 				</div>
 
-				<span class="content-post-head-date">
-					{{ post.created_date }} 
-					| 
-					<a href="{% url 'post_list_category' slug=post.category.slug %}">
-						{{ post.category.name }}
-					</a>
-					|
-					<i class="post-views-icon"></i>
-					<span class="post-views-number">Просмотрена {{ post.number_views }} раз</span> 
-				</span>
-
-				<div class="content-post-head-tags">
-					<div class="tags">
-						<ui>
-							{% for tag in post.tags.all %}
-								<a href="{% url 'post_list_tag' slug=tag.slug %}">{{ tag.name }}</a>
-							{% endfor %}
-						</ui>
-					</div>
+				<div class="content-post-text">
+					{{ post.content_preview | safe }}
+				</div>
+				
+				<div class="content-view-btn-block">
+					<a class="btn btn-default" href="{% url 'post_detail' slug=post.slug %}">Читать дальше</a>
+				</div>
+				<div>
+					<hr/>
 				</div>
 			</div>
-	</div>
-
-	<div class="content-post-text">
-		{{ post.content_preview | safe }}
-	</div>
-	
-	<div class="content-view-btn-block">
-		<a class="btn btn-default" href="{% url 'post_detail' slug=post.slug %}">Читать дальше</a>
-	</div>
-	<div>
-		<hr/>
-	</div>
-</div>
-
-{% endfor %}
+		{% endif %}
+	{% endfor %}
 
 
 {% endblock %}

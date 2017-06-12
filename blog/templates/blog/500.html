@@ -1,0 +1,24 @@
+{% extends 'blog/base.html' %}
+
+
+{% block title %}Ошибка 500{% endblock %}
+
+{% block page_content %}
+
+<div class="content-post">
+	<div class="content-post-text">
+		<h3>Внутреняя ошибка сервера. Error 500</h3>
+	</div>
+	<div>
+		<hr/>
+	</div>
+
+	<div>
+		{% load view_related_posts %}
+		{% view_related_posts %}
+	</div>
+</div>
+
+
+
+{% endblock %}
