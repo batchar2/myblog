@@ -271,6 +271,8 @@ hr {
 	font-style: italic;
 }
 
-#footer div {
-	padding-top: 20px;
+
+
+#footer-text {
+	padding: 20px 0;
 }
