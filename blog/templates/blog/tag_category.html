@@ -7,7 +7,7 @@
 			<ul>
 				{% for category in categories %}
 				<li>
-					<a href="{% url 'post_list_category' slug=category.slug %}">
+					<a href="{% url 'blog:post_list_category' slug=category.slug %}">
 						{{ category.name }}
 						<span class="badge">{{ category.posts.count }}</span>
 					</a>
