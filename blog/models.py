@@ -4,11 +4,18 @@ from django.utils import timezone
 from ckeditor.fields import RichTextField
 #from tinymce.models import HTMLField
 
+from django.core.urlresolvers import reverse
 
 from PIL import Image
 
 
 class SitePage(models.Model):
+    class Meta:
+        verbose_name = 'Страница сайта'
+        verbose_name_plural = 'Страницы сайта'
+        ordering = ('-name',)
+
+
     name = models.CharField(max_length=100, default='')
     url = models.CharField(max_length=100, default='')
 
@@ -19,23 +26,24 @@ class SitePage(models.Model):
     def __str__(self):
         return self.name
 
-    class Meta:
-        verbose_name = 'Страница сайта'
-        verbose_name_plural = 'Страницы сайта'
-        ordering = ('-name',)
+    def get_absolute_url(self):
+        return '/' + self.url
+
 
 class Tag(models.Model):
-    name = models.CharField(max_length=100, default='')
-    slug = models.SlugField(unique=True, max_length=200)
-    is_publish = models.BooleanField(default=False)
-
-    def __str__(self):
-        return self.name
 
     class Meta:
         verbose_name = 'Тег'
         verbose_name_plural = 'Теги'
         ordering = ('-name',)
+    name = models.CharField(max_length=100, default='')
+    slug = models.SlugField(unique=True, max_length=200)
+    is_publish = models.BooleanField(default=False)
+    created_date = models.DateTimeField(default=timezone.now)
+    def __str__(self):
+        return self.name
+
+
 
 
 class Category(models.Model):
@@ -69,7 +77,6 @@ class Post(models.Model):
 
     is_publish = models.BooleanField(default=False)
 
-
     # изображения превью
     preview_image = models.ImageField()
     category = models.ForeignKey(Category, related_name="posts")
@@ -98,12 +105,18 @@ class Post(models.Model):
         self.published_date = timezone.now()
         self.save()
 
+    def get_absolute_url(self):
+        return reverse('blog:post_detail', kwargs={'slug': self.slug})
+
 
     def __str__(self):
         return self.title
 
     def __unicode__(self):
         return self.title
+
+    #def get_absolute_url(self):
+    #    return "/blog/{0}/".format(self.slug)
 
 
     class Meta:

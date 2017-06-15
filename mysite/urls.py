@@ -17,21 +17,34 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 from django.conf import settings
+from django.contrib.sitemaps.views import sitemap
 
 from filebrowser.sites import site
 site.directory = "uploads/"
 site.storage.location = 'static/'
 
-DIRECTORY = getattr(settings, "FILEBROWSER_DIRECTORY", 'uploads/')
-site.directory = DIRECTORY
+# Необходимо импортировать созданные нами классы
+from blog.sitemap import PostSitemap, SitePageSitemap
+
+# Далее создать словарь со всеми классами
+sitemaps = {
+    'post': PostSitemap,
+    'sitepage': SitePageSitemap,
+    #'static': StaticSitemap,
+}
 
 urlpatterns = [
-
     url(r'^admin/filebrowser/', site.urls),
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     url(r'^comments/', include('django_comments_xtd.urls')),
 
     url(r'^admin/', admin.site.urls),
-    url(r'', include('blog.urls')),
+    #url(r'^sitemap.xml$',
+    # 'django.contrib.sitemaps.views.sitemap',
+    # {'sitemaps': sitemaps}),
+    url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps},
+        name='django.contrib.sitemaps.views.sitemap'),
+
+    url(r'', include('blog.urls', namespace='blog')),
 ]

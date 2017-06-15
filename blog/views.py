@@ -26,7 +26,8 @@ def post_detail(request, slug):
 
 def post_list_category(request, slug):
     category = get_object_or_404(Category, slug=slug)
-    return render(request, 'blog/post_list_category.html', {'category': category})
+    return render(request, 'blog/post_list_category.html',
+                    {'category': category})
 
 
 def post_list_tag(request, slug):
